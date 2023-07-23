@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import EventKit
 
-struct ParsedEvent {
+public struct ParsedEvent {
     var title: String
     var url: String
     var startDate: Date
@@ -19,6 +20,13 @@ func parseDescription(description: String) -> String? {
     let zoomUrlPattern = /https?:\/\/\w+\.zoom\.us\/j\/\d+(\?pwd=\w+)?/;
     if let match = description.firstMatch(of: zoomUrlPattern) {
         return String(match.0)
+    }
+    return nil
+}
+
+public func parseEvent(event: EKEvent) -> ParsedEvent? {
+    if let url = parseDescription(description: event.description) {
+        return ParsedEvent(title: event.title, url: url, startDate: event.startDate)
     }
     return nil
 }
