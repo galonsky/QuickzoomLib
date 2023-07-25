@@ -8,7 +8,7 @@
 import Foundation
 import EventKit
 
-public struct ParsedEvent {
+public struct ParsedEvent : Codable {
     var title: String
     var url: String
     var startDate: Date
