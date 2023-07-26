@@ -8,10 +8,22 @@
 import Foundation
 import EventKit
 
-public struct ParsedEvent : Codable {
+public struct ParsedEvent : Codable, Hashable, Equatable, Comparable {
     var title: String
     var url: String
     var startDate: Date
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(url)
+    }
+    
+    public static func == (lhs: ParsedEvent, rhs: ParsedEvent) -> Bool {
+        return lhs.title == rhs.title && lhs.url == rhs.url && lhs.startDate == rhs.startDate
+    }
+    
+    public static func < (lhs: ParsedEvent, rhs: ParsedEvent) -> Bool {
+        return lhs.startDate < rhs.startDate
+    }
 }
 
 
