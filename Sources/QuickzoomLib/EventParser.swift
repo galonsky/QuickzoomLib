@@ -25,7 +25,7 @@ func parseDescription(description: String) -> String? {
 }
 
 public func parseEvent(event: EKEvent) -> ParsedEvent? {
-    if let url = parseDescription(description: event.description) {
+    if let url = parseDescription(description: event.notes ?? "") {
         return ParsedEvent(title: event.title, url: url, startDate: event.startDate)
     }
     return nil
