@@ -18,9 +18,11 @@ public struct AlfredItems : Codable {
 }
 
 func eventToAlfredItem(event: ParsedEvent) -> AlfredItem {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "EEEE, h:mm a"
     return AlfredItem(
         title: event.title,
-        subtitle: event.startDate.ISO8601Format(),
+        subtitle: dateFormatter.string(from: event.startDate),
         arg: event.url
     )
 }
