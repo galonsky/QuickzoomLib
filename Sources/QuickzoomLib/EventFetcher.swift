@@ -28,9 +28,9 @@ public class EventFetcher {
         let calendar = Calendar.current
 
         // Create the start date components
-        var twoHoursAgoComponents = DateComponents()
-        twoHoursAgoComponents.hour = -2
-        let twoHoursAgo = calendar.date(byAdding: twoHoursAgoComponents, to: Date(), wrappingComponents: false)
+        var oneHourAgoComponents = DateComponents()
+        oneHourAgoComponents.hour = -1
+        let oneHourAgo = calendar.date(byAdding: oneHourAgoComponents, to: Date(), wrappingComponents: false)
 
         // Create the end date components.
         var oneDayFromNowComponents = DateComponents()
@@ -39,7 +39,7 @@ public class EventFetcher {
 
         // Create the predicate from the event store's instance method.
         var predicate: NSPredicate? = nil
-        if let anAgo = twoHoursAgo, let aNow = oneDayFromNow {
+        if let anAgo = oneHourAgo, let aNow = oneDayFromNow {
             predicate = store.predicateForEvents(withStart: anAgo, end: aNow, calendars: nil)
         }
 
